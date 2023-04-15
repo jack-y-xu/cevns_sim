@@ -9,7 +9,7 @@
 #include "G4SteppingVerbose.hh"
 #include "Randomize.hh"
 
-#include "ArgonSlabDetectorConstruction.hh"
+#include "DuneFDDetectorConstruction.hh"
 #include "PhysicsList.hh"
 #include "PrimaryGeneratorActionDispatcher.hh"
 #include "PrimaryGeneratorActionCommand.hh"
@@ -51,7 +51,7 @@ public:
         runManager = new G4RunManager;
 
         // initialization classes
-        runManager->SetUserInitialization(new ArgonSlabDetectorConstruction);
+        runManager->SetUserInitialization(new DuneFDDetectorConstruction);
         runManager->SetUserInitialization(new PhysicsList);
 
         primaryGeneratorActionDispatcher = new PrimaryGeneratorActionDispatcher();

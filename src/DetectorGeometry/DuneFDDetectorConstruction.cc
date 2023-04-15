@@ -23,8 +23,6 @@ DuneFDDetectorConstruction::DuneFDDetectorConstruction() : G4VUserDetectorConstr
 DuneFDDetectorConstruction::~DuneFDDetectorConstruction() {}
 
 G4VPhysicalVolume* DuneFDDetectorConstruction::Construct() {
-//    G4Material* air = G4NistManager::Instance()->FindOrBuildMaterial("G4_AIR");
-
     G4NistManager* nistManager = G4NistManager::Instance();
     G4Material* liquidArgon = nistManager->FindOrBuildMaterial("G4_lAr");
 
