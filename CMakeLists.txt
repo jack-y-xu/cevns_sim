@@ -24,7 +24,7 @@ file(GLOB_RECURSE sources ${PROJECT_SOURCE_DIR}/src/*.cc)
 message("Headers are ${headers}")
 message("Sources are ${sources}")
 
-add_executable(cevns_sim cevns_sim.cc ${sources} ${headers})
+add_executable(cevns_sim cevns_sim.cc ${sources} ${headers} src/DetectorGeometry/DuneFDSensitiveDetector.cc)
 target_link_libraries(cevns_sim ${Geant4_LIBRARIES})
 
 # Copy scripts to build directory

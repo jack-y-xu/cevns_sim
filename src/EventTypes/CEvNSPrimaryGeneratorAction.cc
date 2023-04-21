@@ -36,7 +36,6 @@ void CEvNSPrimaryGeneratorAction::GeneratePrimaries(G4Event* event) {
     event->AddPrimaryVertex(vertex);
 }
 
-
 // NOT IMPLEMENTED YET
 G4double CEvNSPrimaryGeneratorAction::sampleEventTime() {
     return 0 * s;
@@ -69,9 +68,13 @@ G4ThreeVector CEvNSPrimaryGeneratorAction::getPerpPolarizationDirection(G4ThreeV
 };
 
 G4ThreeVector CEvNSPrimaryGeneratorAction::sampleEventPosition() {
-    return G4ThreeVector(0*m,0*m,0*m);
+    G4double x = (G4UniformRand()-0.5) * ARGON_SLAB_X;
+    G4double y = (G4UniformRand()-0.5) * ARGON_SLAB_Y;
+    G4double z = (G4UniformRand()-0.5) * ARGON_SLAB_Z;
+    return G4ThreeVector(x,y,z);
 };
 
 G4ParticleDefinition* CEvNSPrimaryGeneratorAction::getOpticalPhotonDefinition() {
-    return particleTable->FindParticle("geantino");
+    G4ParticleDefinition* opticalPhoton = G4OpticalPhoton::Definition();
+    return opticalPhoton;
 };
