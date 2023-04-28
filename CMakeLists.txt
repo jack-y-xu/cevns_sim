@@ -13,6 +13,8 @@ include_directories(${PROJECT_SOURCE_DIR}/src/DetectorGeometry)
 include_directories(${PROJECT_SOURCE_DIR}/src/EventTypeHandler)
 include_directories(${PROJECT_SOURCE_DIR}/src/EventTypes)
 include_directories(${PROJECT_SOURCE_DIR}/src/PhysicalProcesses)
+include_directories(${PROJECT_SOURCE_DIR}/src/SimulationActions)
+include_directories(${PROJECT_SOURCE_DIR}/src/Analysis)
 
 include_directories(${Geant4_INCLUDE_DIR})
 
@@ -24,7 +26,7 @@ file(GLOB_RECURSE sources ${PROJECT_SOURCE_DIR}/src/*.cc)
 message("Headers are ${headers}")
 message("Sources are ${sources}")
 
-add_executable(cevns_sim cevns_sim.cc ${sources} ${headers} src/DetectorGeometry/DuneFDSensitiveDetector.cc)
+add_executable(cevns_sim cevns_sim.cc ${sources} ${headers})
 target_link_libraries(cevns_sim ${Geant4_LIBRARIES})
 
 # Copy scripts to build directory

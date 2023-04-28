@@ -54,6 +54,10 @@ class DuneFDDetectorConstruction: public G4VUserDetectorConstruction {
         void placeWorld();
         void placeArgonBox();
         void placeSensitiveDetector();
+
+    G4Material *getAir();
+
+    G4Material *getStainlessSteel();
 };
 
 #endif //CEVNS_SIM_DUNEFDDETECTORCONSTRUCTION_HH

@@ -8,6 +8,7 @@
 #include "G4VSensitiveDetector.hh"
 #include "G4ThreeVector.hh"
 #include "G4LogicalVolume.hh"
+#include "G4AnalysisManager.hh"
 
 class G4Step;
 class G4HCofThisEvent;

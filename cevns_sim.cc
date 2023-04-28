@@ -10,9 +10,13 @@
 #include "Randomize.hh"
 
 #include "DuneFDDetectorConstruction.hh"
-#include "PhysicsList.hh"
+#include "CombinedPhysicsList.hh"
 #include "PrimaryGeneratorActionDispatcher.hh"
 #include "PrimaryGeneratorActionCommand.hh"
+#include "DebugRunAction.hh"
+#include "DebugSteppingAction.hh"
+#include "DefaultRunAction.hh"
+
 
 class InstanceManager {
     G4RunManager* runManager = nullptr;
@@ -25,6 +29,7 @@ public:
     InstanceManager(int argc, char** argv) {
         initializeUI(argc, argv);
         setupRandom();
+
         setupPrecision(4);
         initializeRunManager();
         initializeUIManager();
@@ -52,10 +57,12 @@ public:
 
         // initialization classes
         runManager->SetUserInitialization(new DuneFDDetectorConstruction);
-        runManager->SetUserInitialization(new PhysicsList);
+        runManager->SetUserInitialization(new CombinedPhysicsList);
 
         primaryGeneratorActionDispatcher = new PrimaryGeneratorActionDispatcher();
         runManager->SetUserAction(primaryGeneratorActionDispatcher);
+        G4cout << "init runaction called" << G4endl;
+        runManager->SetUserAction(new DefaultRunAction);
     }
 
     void initializeUI(int argc, char** argv) {
