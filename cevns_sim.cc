@@ -12,28 +12,36 @@
 #include "DuneFDDetectorConstruction.hh"
 #include "CombinedPhysicsList.hh"
 #include "PrimaryGeneratorActionDispatcher.hh"
-#include "PrimaryGeneratorActionCommand.hh"
+#include "src/Commands/PrimaryGeneratorActionCommand.hh"
 #include "DebugRunAction.hh"
 #include "DebugSteppingAction.hh"
 #include "DefaultRunAction.hh"
-
+#include "CEvNSEventAction.hh"
+#include "WriteRecordingCommand.hh"
+#include "CEvNSPrimaryGeneratorAction.hh"
 
 class InstanceManager {
+public:
     G4RunManager* runManager = nullptr;
     G4VisManager* visManager = nullptr;
     G4UImanager* UIManager = nullptr;
     G4UIExecutive* ui = nullptr;
+    CEvNSEventAction* eventAction = nullptr;
+    CEvNSPrimaryGeneratorAction* pga = nullptr;
     PrimaryGeneratorActionDispatcher* primaryGeneratorActionDispatcher = nullptr;
 
-public:
-    InstanceManager(int argc, char** argv) {
-        initializeUI(argc, argv);
+    InstanceManager(int argc, char** argv, bool visual) {
         setupRandom();
-
         setupPrecision(4);
         initializeRunManager();
-        initializeUIManager();
-        startUI();
+        initializeUIManager(visual);
+
+        if (visual) {
+            initializeUI(argc, argv);
+            initializeVisManager();
+            startUI();
+        }
+
     }
 
     ~InstanceManager() {
@@ -61,20 +69,23 @@ public:
 
         primaryGeneratorActionDispatcher = new PrimaryGeneratorActionDispatcher();
         runManager->SetUserAction(primaryGeneratorActionDispatcher);
-        G4cout << "init runaction called" << G4endl;
-        runManager->SetUserAction(new DefaultRunAction);
+
+        pga = dynamic_cast<CEvNSPrimaryGeneratorAction*>(primaryGeneratorActionDispatcher->getCurrentPGA());
+
+        eventAction = new CEvNSEventAction("output.root");
+        runManager->SetUserAction(eventAction);
     }
 
     void initializeUI(int argc, char** argv) {
         ui = new G4UIExecutive(argc, argv);
     }
 
-    void initializeUIManager() {
+    void initializeUIManager(bool visual) {
         UIManager = G4UImanager::GetUIpointer();
 
         PrimaryGeneratorActionCommand* pgaCommand = new PrimaryGeneratorActionCommand(primaryGeneratorActionDispatcher);
+        WriteRecordingCommand* recordCommand = new WriteRecordingCommand(eventAction);
 
-        initializeVisManager();
         UIManager->ApplyCommand("/control/execute vis.mac");
     }
 
@@ -90,6 +101,13 @@ public:
 
 int main(int argc, char** argv) {
 
-    InstanceManager* im = new InstanceManager(argc, argv);
+    InstanceManager* im = new InstanceManager(argc, argv, false);
 
+    for (int numPhotons = 1; numPhotons <= 40; numPhotons ++) {
+        im->pga->setNumPhotons(numPhotons);
+        im->UIManager->ApplyCommand("/run/beamOn 10000");
+        G4cout << "Finished " << numPhotons << '\n';
+    }
+
+    im->eventAction->writeRecording();
 }

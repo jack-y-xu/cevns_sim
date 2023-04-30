@@ -16,17 +16,10 @@
 #include "G4SDManager.hh"
 #include "DuneFDSensitiveDetector.hh"
 #include "G4OpticalPhoton.hh"
+#include "GlobalConstants.hh"
 
 // Definitions of the box
-#define ARGON_SLAB_X (3.6 * m)
-#define ARGON_SLAB_Y (12.0 * m)
-#define ARGON_SLAB_Z (58.0 * m)
-#define SD_THICKNESS (0.01 * m)
-#define MARGIN (3.0 * m)
 
-#define WORLD_SIZE_X (ARGON_SLAB_X + MARGIN)
-#define WORLD_SIZE_Y (ARGON_SLAB_Y + MARGIN)
-#define WORLD_SIZE_Z (ARGON_SLAB_Z + MARGIN)
 
 class DuneFDDetectorConstruction: public G4VUserDetectorConstruction {
     public:

@@ -9,6 +9,8 @@
 #include "G4ThreeVector.hh"
 #include "G4LogicalVolume.hh"
 #include "G4AnalysisManager.hh"
+#include "G4RunManager.hh"
+#include "CEvNSEventData.hh"
 
 class G4Step;
 class G4HCofThisEvent;

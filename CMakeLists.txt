@@ -10,14 +10,14 @@ message("HI")
 
 # Include geant4 files
 include_directories(${PROJECT_SOURCE_DIR}/src/DetectorGeometry)
-include_directories(${PROJECT_SOURCE_DIR}/src/EventTypeHandler)
-include_directories(${PROJECT_SOURCE_DIR}/src/EventTypes)
-include_directories(${PROJECT_SOURCE_DIR}/src/PhysicalProcesses)
+include_directories(${PROJECT_SOURCE_DIR}/src/PGAHandler)
+include_directories(${PROJECT_SOURCE_DIR}/src/PrimaryGeneratorActions)
+include_directories(${PROJECT_SOURCE_DIR}/src/PhysicsLists)
 include_directories(${PROJECT_SOURCE_DIR}/src/SimulationActions)
 include_directories(${PROJECT_SOURCE_DIR}/src/Analysis)
-
+include_directories(${PROJECT_SOURCE_DIR}/src/Commands)
+include_directories(${PROJECT_SOURCE_DIR}/src)
 include_directories(${Geant4_INCLUDE_DIR})
-
 
 # Add executable and link to Geant4 libraries
 file(GLOB_RECURSE headers ${PROJECT_SOURCE_DIR}/src/*.hh)

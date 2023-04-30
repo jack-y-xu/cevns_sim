@@ -19,17 +19,18 @@ DefaultRunAction::DefaultRunAction() {
     analysisManager->CreateNtupleDColumn("x");
     analysisManager->CreateNtupleDColumn("y");
     analysisManager->CreateNtupleDColumn("z");
+    analysisManager->CreateNtupleDColumn("eventID");
+    analysisManager->CreateNtupleDColumn("eventCreatedPhotons");
     analysisManager->FinishNtuple();
 };
 
 DefaultRunAction::~DefaultRunAction() {};
 
 void DefaultRunAction::BeginOfRunAction(const G4Run *) {
-    analysisManager->SetFileName("output");
+    analysisManager->SetFileName("output.root");
     // Open the output file
     analysisManager->OpenFile();
 }
-
 
 void DefaultRunAction::EndOfRunAction(const G4Run *) {
     analysisManager->Write();
