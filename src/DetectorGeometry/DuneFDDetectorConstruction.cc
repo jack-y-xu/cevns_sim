@@ -63,15 +63,15 @@ G4Material* DuneFDDetectorConstruction::getLiquidArgon() {
     G4State state = kStateLiquid;
     G4double temperature = 87.3 * kelvin;
     G4double pressure = 1.0 * atmosphere;
-    G4double energy[] = {1.0 * eV, 20.0 * eV};
-    G4double rindex[] = {1.23, 1.23};
-    G4double absLength[] = {0.5 * m, 0.5  * m};
+    G4double photonEnergy[] = {9.322158 * eV, 9.6*eV, 10.080057 * eV};
+    G4double rindex[] = {1.41, 1.44,1.53};
+    G4double absLength[] = {0.5 * m, 0.5  * m, 0.5*m};
 
     G4Material* lAr = new G4Material("LiquidArgon", z, a, density, state, temperature, pressure);
 
     G4MaterialPropertiesTable* lArMPT = new G4MaterialPropertiesTable();
-    lArMPT->AddProperty("RINDEX", energy, rindex, 2);
-    lArMPT->AddProperty("ABSLENGTH", energy, absLength, 2);
+    lArMPT->AddProperty("RINDEX", photonEnergy, rindex, 3);
+    lArMPT->AddProperty("ABSLENGTH", photonEnergy, absLength, 3);
     lAr->SetMaterialPropertiesTable(lArMPT);
 
     return lAr;
@@ -110,7 +110,6 @@ G4Material* DuneFDDetectorConstruction::getStainlessSteel() {
     G4double absLength[] = {5 * nm, 5  * nm};
     const G4int nEntries = 2;
 
-
     G4MaterialPropertiesTable* steelMPT = new G4MaterialPropertiesTable();
     steelMPT->AddProperty("ABSLENGTH", photonEnergy, absLength, nEntries);
 
@@ -122,12 +121,11 @@ G4Material* DuneFDDetectorConstruction::getStainlessSteel() {
 G4Material* DuneFDDetectorConstruction::getSiPM() {
 
     G4double density = 2.32 * g/cm3; // Density of Silicon dioxide (SiO2)
-    const G4int nEntries = 2;
-    G4double photonEnergy[] = {1 * eV, 20.0 * eV};
+    G4double photonEnergy[] = {9.322158 * eV, 9.6*eV, 10.080057 * eV};
+    G4double rindex[] = {1.41, 1.44,1.53};
+    G4double absLength[] = {1 * um, 1 * um, 1*um};
     // SETTING THIS TO A SHORT VALUE - FOR SURFACE DETECTION ONLY. NO EXP. VALUE EXISTS FOR OPTICAL PHOTONS.
-    G4double absLength[] = {1 * um, 1 * um};
     // SETTING THIS EQUAL TO ARGON TO AVOID DIRECTIONAL CHANGE OF PHOTON
-    G4double rindex[] = {1.23, 1.23};
 
     G4Material* SiPM = new G4Material("getSiPM", density, 2);
     G4Element* Si = new G4Element("Silicon", "Si", 14, 28.085 * g/mole);
@@ -139,8 +137,8 @@ G4Material* DuneFDDetectorConstruction::getSiPM() {
     G4MaterialPropertiesTable* SiPMMPT = new G4MaterialPropertiesTable;
 
     G4MaterialPropertiesTable* sipmPMT = new G4MaterialPropertiesTable();
-    sipmPMT->AddProperty("RINDEX", photonEnergy, rindex, 2);
-    sipmPMT->AddProperty("ABSLENGTH", photonEnergy, absLength, nEntries);
+    sipmPMT->AddProperty("RINDEX", photonEnergy, rindex, 3);
+    sipmPMT->AddProperty("ABSLENGTH", photonEnergy, absLength, 3);
 
     SiPM->SetMaterialPropertiesTable(sipmPMT);
     return SiPM;
