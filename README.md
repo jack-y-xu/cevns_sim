@@ -1,7 +1,7 @@
 # cevns_sim
 Geant4 simulation of liquid argon detector written from scratch that focuses on CEvNS glow and associated processes.
 
-Supports adding multiple types of events and switching amongst them. 
+Code is written as to support adding multiple types of events and switching amongst them. 
 
 
 ## Events
