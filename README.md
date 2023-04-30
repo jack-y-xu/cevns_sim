@@ -8,7 +8,7 @@ Code is written as to support adding multiple types of events and switching amon
 ____
 * CEVNS: 
   * Isotropically distributed photons originating from a vertex, assumed to be the location of the cevns event
-    * Location: Randomly sampled in box
+    * Location: Randomly sampled in the liquid argon detector dimensions
     * Photon energy distribution: Uniform 123 nm - 133 nm
     * Number of photons: WIP. Currently set at 30 (need to change based on recoil energy)
     * Directions of photons: Three vector in random direction
