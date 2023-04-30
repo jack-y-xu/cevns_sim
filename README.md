@@ -4,7 +4,7 @@ Geant4 simulation of liquid argon detector written from scratch that focuses on 
 Supports adding multiple types of events and switching amongst them. 
 
 
-Events
+## Events
 ____
 * CEVNS: 
   * Isotropically distributed photons originating from a vertex, assumed to be the location of the cevns event
@@ -20,7 +20,7 @@ ____
 * Charged events:
   * WIP
 
-DetectorConstructions
+## DetectorConstructions
 ____
 
 * DuneFDDetectorConstruction
